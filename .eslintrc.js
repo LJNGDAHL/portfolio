@@ -23,6 +23,7 @@ module.exports = {
             "error",
             2
         ],
+        "react/jsx-uses-vars": "error",
         "linebreak-style": [
             "error",
             "unix"
