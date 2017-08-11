@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# build output
+.next
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.development
+.env.test
+.env.production
+
+npm-debug.log*
