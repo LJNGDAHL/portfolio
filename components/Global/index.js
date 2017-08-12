@@ -6,9 +6,9 @@ export default function Global() {
       :root {
         --black: #212123;
         --blue: #03E9F8;
-        --grey: #E5E5E5;
+        --grey: #f2f2f2;
         --pink: #F2BCE0;
-        --white: #F2F2F2;
+        --white: #F8F8F8;
       }
 
       * {

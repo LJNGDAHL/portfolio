@@ -4,9 +4,9 @@ export default function Work({ children }) {
       { children }
       <style jsx>{`
         .Work {
-          background-color: var(--grey);
+          border: 5px solid var(--grey);
           padding: 2rem;
-          margin-bottom: 1rem;
+          margin: 2rem auto;
           width: 100%;
         }
 

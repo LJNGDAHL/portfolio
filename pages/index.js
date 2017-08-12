@@ -8,11 +8,18 @@ export default function Main() {
   return (
     <div>
       <Header />
-      <h2>This is the main page.</h2>
-      <Link href="/about"><a>About</a></Link>
-      <Works />
-      <Footer />
+      <div className="Main">
+        <h2>This is the main page.</h2>
+        <Link href="/about"><a>About</a></Link>
+        <Works />
+        <Footer />
+      </div>
       <Global />
+      <style jsx>{`
+        .Main {
+          background-color: var(--white);
+        }
+      `}</style>
     </div>
   );
 }

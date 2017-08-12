@@ -15,15 +15,6 @@ export default function Works() {
       <Work>
         <p>Maecenas vel tristique lorem. Sed elementum, magna nec mollis aliquet, nisl metus dapibus justo, sit amet elementum neque lorem non purus. Suspendisse magna risus, facilisis ac risus at, consectetur malesuada leo. Maecenas nec efficitur justo, nec feugiat nisl. Aliquam nec quam iaculis, pellentesque erat et, auctor massa. Donec fermentum consectetur sem, non porta diam sagittis in. Mauris ut volutpat nisi. Praesent et tempus nisl.</p>
       </Work>
-      <style jsx>{`
-        .Works {
-          align-items: flex-start;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          padding: 1rem;
-        }
-      `}</style>
     </div>
   );
 }
