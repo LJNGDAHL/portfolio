@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Header from '../components/Header';
 import Works from '../components/Works';
 import Global from '../components/Global';
+import Statusbar from '../components/Statusbar';
 import Footer from '../components/Footer';
 
 export default function Main() {
@@ -11,6 +12,7 @@ export default function Main() {
       <div className="Main">
         <h2>This is the main page.</h2>
         <Link href="/about"><a>About</a></Link>
+        <Statusbar />
         <Works />
         <Footer />
       </div>
