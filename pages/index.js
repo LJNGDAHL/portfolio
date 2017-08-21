@@ -17,6 +17,7 @@ class Home extends Component {
     try {
       // Make a request on the server
       if (!process.browser) {
+        // const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
         const res = await fetch('http://dog.ceo/api/breeds/image/random');
         const data = await res.json();
         return { data };
@@ -41,7 +42,8 @@ class Home extends Component {
 
   render() {
     // Only render statusbar if no error occurs while fetching data
-    const statusbar = !this.props.error ? <Statusbar data={ this.props.data } /> : '';
+    // TODO: Get props.data with connect instead of passing them down.
+    const statusbar = !this.props.error ? <Statusbar/> : '';
 
     return (
       <div>
