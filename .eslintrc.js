@@ -1,4 +1,5 @@
 module.exports = {
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "es6": true,
@@ -35,6 +36,9 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "class-methods-use-this": "off",
+        "comma-dangle": "off",
+        "no-else-return": "off"
     }
 };
