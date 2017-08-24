@@ -11,8 +11,6 @@ export default function Footer() {
       </div>
       <style jsx>{`
         .Footer {
-          background-color: var(--black);
-          color: var(--white);
           display: flex;
           justify-content: center;
           align-items: center;

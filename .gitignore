@@ -9,6 +9,7 @@
 
 # misc
 /static
+.vscode/
 .DS_Store
 .env
 .env.development

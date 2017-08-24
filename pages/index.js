@@ -1,62 +1,73 @@
 import { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
-import fetch from 'isomorphic-unfetch'; // A lib for using fetch in both client/server.
-import Header from '../components/Header';
-import Works from '../components/Works';
-import Global from '../components/Global';
-import Statusbar from '../components/Statusbar';
-import Footer from '../components/Footer';
+import fetch from 'isomorphic-unfetch'; // For using fetch in both client/server
 
+import content from '../content'; // Is to be replaced with CMS in future
 import { addGithubData } from '../actions';
 import initStore from '../store';
 
-class Home extends Component {
-  // FIXME: Right now, the component does not read from sessionStorage.
-  // FIXME: Do we need to have a timeout on how long to work on this?
+import Global from '../components/Global';
+import Header from '../components/Header';
+import Statusbar from '../components/Statusbar';
+import Work from '../components/Work';
+import Footer from '../components/Footer';
+
+let data;
+
+class Index extends Component {
   static getInitialProps = async () => {
-    try {
-      // Make a request on the server
-      if (!process.browser) {
-        // const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
+    const props = { works: content };
+
+    /* If less then an hour since last fetch, return data stored on server.
+     * This is due to limitations in Githubs open Api.
+     */
+    if (data && ((Date.now() - data.time) < 3600000)) {
+      console.log('Using data stored locally');
+    } else {
+      try {
+        console.log('New fetch');
         const res = await fetch('http://dog.ceo/api/breeds/image/random');
-        const data = await res.json();
-        return { data };
+        // const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
+        data = await res.json();
+
+        data.time = Date.now();
+      } catch (error) {
+        props.error = error;
       }
-      // Get data from sessionStorage when in client
-      const data = JSON.parse(sessionStorage.getItem('githubData'));
-      return { data };
-    } catch (error) {
-      return { error };
     }
+
+    return Object.assign(props, {
+      github: data
+    });
   };
 
   componentDidMount() {
-    if (process.browser) {
-      if (!sessionStorage.getItem('githubData')) {
-        sessionStorage.setItem('githubData', JSON.stringify(this.props.data));
-      }
-    }
-
-    this.props.dispatch(addGithubData(this.props.data));
+    // Update redux with current data
+    this.props.dispatch(addGithubData(this.props.github));
   }
 
   render() {
-    // Only render statusbar if no error occurs while fetching data
-    // TODO: Get props.data with connect instead of passing them down.
-    const statusbar = !this.props.error ? <Statusbar/> : '';
-
     return (
       <div>
         <Header />
         <div className='Main'>
-          {statusbar}
-          <Works />
+          <Statusbar />
+          { this.props.works.map(item => (
+            <div className="Works" key={ item.id }>
+              <Work
+                headline={ item.headline }
+                introduction={ item.introduction }
+                id={ item.id }
+                content={ item.content }/>
+            </div>
+          )) }
           <Footer />
         </div>
         <Global />
         <style jsx>{`
           .Main {
             background-color: var(--white);
+            color: var(--black);
           }
         `}</style>
       </div>
@@ -64,9 +75,4 @@ class Home extends Component {
   }
 }
 
-Home = withRedux(initStore, state => ({
-  foo: state.foo,
-  addGithubData: state.addGithubData
-}))(Home);
-
-export default Home;
+export default withRedux(initStore)(Index);

@@ -14,12 +14,10 @@ export default function Header() {
         <div className="Headline">
           <div className="Navigation">
             <div className="Contacts">
-              <p>Get In Touch</p>
-              <p>hello@katarinaljungdahl.se</p>
-              <p>+46 (0) 73 842 79 19</p>
+              <h2 className="Contacts__headline">Get In Touch</h2>
+              <a className="Contacts__link" href="mailto:hello@katarinaljungdahl.se?subject=Hello Developer!">hello@katarinaljungdahl.se</a>
+              <a className="Contacts__link" href="tel:+46738427919">+46 (0) 73 842 79 19</a>
             </div>
-            {/* <Anchor url="/" className="Navigation-item" cssClass="Headline-link">Home</Anchor>
-            <Anchor url="/about" cssClass="Headline-link">About</Anchor> */}
           </div>
           <h1 className="Headline-name">Katarina Ljungdahl</h1>
           <h2 className="Headline-title">Developer</h2>
@@ -60,14 +58,28 @@ export default function Header() {
           font-smoothing: antialiased;
         }
 
-        .Contacts p:first-child {
+        .Contacts__headline {
           font-weight: 700;
+          font-size: inherit;
+        }
+
+        .Contacts__link {
+          display: block;
+          text-decoration: none;
+        }
+
+        .Contacts__link:hover {
+          color: var(--blue);
+          transition: color 150ms ease;
         }
 
         .Headline-name {
           color: var(--white);
           font-family: 'Roboto', Helvetica, sans-serif;
           font-weight: 300;
+          text-transform: uppercase;
+          font-weight: 400;
+          -webkit-font-smoothing: antialiased;
         }
 
         .Headline-title {
