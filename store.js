@@ -14,4 +14,29 @@ const initStore = (initialState = {}) => {
   );
 };
 
+// TODO: FIGURE OUT WHAT TO DO WITH THIS!
+// const initStore = (initialState = {}, isServer) => {
+//   if (isServer && typeof window === 'undefined') {
+//     return createStore(
+//       rootReducer,
+//       initialState,
+//       composeEnhancers(applyMiddleware(thunk))
+//     );
+//   }
+//   let store = window.localStorage.getItem('store');
+
+//   if (!store) {
+//     store = createStore(
+//       rootReducer,
+//       initialState,
+//       composeEnhancers(applyMiddleware(thunk))
+//     );
+//   } else {
+//     store = JSON.parse(store);
+//   }
+
+//   return store;
+// };
+
+
 export default initStore;

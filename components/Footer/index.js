@@ -1,4 +1,5 @@
 import Anchor from '../Anchor';
+import Global from '../Global';
 
 export default function Footer() {
   return (
@@ -9,6 +10,7 @@ export default function Footer() {
         <Anchor url="https://www.linkedin.com/in/katarinaljungdahl/">Linkedin</Anchor>
         <Anchor url="https://twitter.com/LJNGDAHL/">Twitter</Anchor>
       </div>
+      <Global />
       <style jsx>{`
         .Footer {
           display: flex;

@@ -1,5 +1,41 @@
-export const isServer = () => {
-  return !(typeof window !== 'undefined' && window.document);
+/**
+ * Gets viewport height
+ * @return {Number}
+ */
+export const vh = () => {
+  return (
+    Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  );
+};
+
+/**
+ * Checks if element is in or above viewport
+ * @param {string} element The element to be evaluated
+ * @return {Boolean}
+ */
+export const inOrAboveView = (element) => {
+  if ((window.scrollY + vh()) > element.offsetTop) {
+    return true;
+  }
+  return false;
+}
+
+
+/**
+* Ensures that given function only executes once during a given interval.
+* @param  {function} fn      Give any function to debounce
+* @param  {number}   time    The given interval (defaults to 200ms)
+* @return {function}         Debounced function.
+*/
+export const debounce = (fn, time = 200) => {
+  let timeout;
+
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      fn.apply(this, args);
+    }, time);
+  };
 };
 
 /* eslint-disable */

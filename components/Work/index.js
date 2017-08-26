@@ -1,105 +1,104 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 import Router from 'next/router';
-import { CSSTransitionGroup } from 'react-transition-group';
-// import WorkLink from '../WorkLink';
+import Global from '../Global';
+import WorkLink from '../WorkLink';
+import Tags from '../Tags';
+import { toggleWork, workInView } from '../../actions';
+
+import { debounce, inOrAboveView } from '../../utils';
 
 class Work extends Component {
-  constructor() {
-    super();
-    this.state = {
-      height: 0
-    };
-  }
-
-  componentDidMount() {
-    this.updateHeight();
-  }
-
-  componentDidUpdate() {
-    this.updateHeight();
-  }
-
-  updateHeight() {
-    if (this.state.height !== this.mainContainer.clientHeight) {
-      this.setState({ height: this.mainContainer.clientHeight });
-    }
-  }
-
+  // Expand work item on index.js
   handleClick = (e) => {
     e.preventDefault();
+    this.props.dispatch(toggleWork(this.props.id));
+
+    // TODO: Refactor!
+    const index = this.props.open.indexOf(this.props.id);
 
     // Enables link to single work page on reload (or if javascript is disabled)
-    if (this.state.open) {
+    if (index !== -1) {
       Router.push('/');
     } else {
       Router.push(`/?workId=${this.props.id}`, `/work/${this.props.id}`);
     }
-    this.setState({ open: !this.state.open });
+  }
+
+  /**
+   * Check if component is in or above viewport on scroll.
+   * When entering viewport, add component in list regarding
+   * which Work components has entered viewport.
+   */
+  hasEnteredView = () => {
+    const index = this.props.inOrAboveView.indexOf(this.props.id);
+    const notAdded = (index === -1);
+
+    // Add Component in list, if not already added
+    if (inOrAboveView(this.mainContainer) && notAdded) {
+      this.props.dispatch(workInView(this.props.id));
+      // Stop listening once component is added in list.
+      window.removeEventListener('scroll', debounce(this.hasEnteredView));
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', debounce(this.hasEnteredView, 50));
   }
 
   render() {
-    console.log(this.state.height);
-
-    const detailedContent = this.state.open ? <p className="Work__detailed expanded">{this.props.content}</p> : <p className="Work__detailed"></p>;
+    const work = this.props.works.find(item => item.id === this.props.id);
+    const isOpen = (this.props.open.indexOf(this.props.id) !== -1);
+    const hasBeenInView = (this.props.inOrAboveView.indexOf(this.props.id) !== -1);
 
     return (
-      <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={this.state.open ? 'Work expanded' : 'Work'} >
-        <div className="Work__textcontainer" >
-          <h3 className="Work__headline">{ this.props.headline }</h3>
-          <p className="Work__introduction">{ this.props.introduction }</p>
-          <p className={this.state.open ? 'Work__detailed expanded' : 'Work__detailed'} >{this.props.content}</p>
-          <a className="Work__link" href={`/work/${this.props.id}`} onClick={ this.handleClick }>{ this.state.open ? 'Close' : 'Read more' }</a>
+      <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ isOpen ? 'Work expanded' : 'Work' } >
+        <div className={ hasBeenInView ? 'Work__textcontainer visible' : 'Work__textcontainer' } >
+          <h3 className="u-fontL u-semiBold u-upperCase u-colorCarmine">{ work.headline }</h3>
+          <Tags tags={ work.tags } />
+          <p className="u-fontM u-marginBottom">{ work.introduction }</p>
+          <p className={ isOpen ? 'Work__detailed expanded' : 'Work__detailed' } >{ work.content }</p>
+          <WorkLink id={ this.props.id } onClick={ this.handleClick }>
+            { isOpen ? 'Close' : 'Read More' }
+          </WorkLink>
         </div>
+        <Global />
         <style jsx>{`
           .Work {
             background-color: inherit;
             color: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
             width: 100%;
-            position: relative;
+            padding: 2rem;
           }
 
-          .Work__headline {
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: 3rem;
-          }
-
-          .Work__introduction, .Work__link {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-          }
-
-          .Work__link {
-            display: block;
-            text-align: center;
-            margin-top: 1rem;
-            text-decoration: none;
-          }
-
-          {/* TODO: This transition looks like shit.  */}
           .Work__detailed {
             max-height: 0;
-            transition: max-height 450ms ease-in-out 75ms;
             overflow: hidden;
+            opacity: 0;
+            transition: max-height 500ms ease-out 100ms, opacity 500ms ease-out 100ms;
           }
 
-          /* TODO: Figure out how to solve this without hardcoding  */}
           .Work__detailed.expanded {
             max-height: 300px;
+            opacity: 1;
           }
 
+          {/* TODO: Right now, this applies to CSS even when javascript disabled.  */}
           .Work__textcontainer {
-            border-bottom: 3px solid var(--black);
+            margin: 3rem auto;
+            opacity: 0;
+            transform: translateY(0);
+            transition: all 250ms ease-in;
           }
 
-          @media screen and (min-width: 600px) {
+          .Work__textcontainer.visible {
+            transform: translateY(-50px);
+            opacity: 1;
+          }
+
+          @media screen and (min-width: 650px) {
               .Work__textcontainer {
-                width: 600px;
-                margin: 0 auto;
+                width: 650px;
               }
           }
         `}
@@ -109,4 +108,12 @@ class Work extends Component {
   }
 }
 
-export default Work;
+const mapStateToProps = (state) => {
+  return {
+    works: state.works.items,
+    open: state.works.open,
+    inOrAboveView: state.works.inOrAboveView
+  };
+};
+
+export default connect(mapStateToProps)(Work);

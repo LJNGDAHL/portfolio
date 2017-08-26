@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Global from '../Global';
 
 export default function Anchor({ url, children, cssClass = 'Anchor' }) {
   return (
@@ -6,6 +7,7 @@ export default function Anchor({ url, children, cssClass = 'Anchor' }) {
       <Link>
         <a href={ url } className={ cssClass } >{ children }</a>
       </Link>
+      <Global />
       <style jsx>{`
         .Anchor, .Headline-link {
           color: var(--white);
@@ -17,7 +19,7 @@ export default function Anchor({ url, children, cssClass = 'Anchor' }) {
         }
 
         .Anchor:hover, .Headline-link:hover {
-          color: var(--blue);
+          color: var(--vermilion);
         }
 
       `}</style>

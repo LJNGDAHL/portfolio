@@ -22,7 +22,6 @@ class Statusbar extends Component {
           </p>
           <style jsx>{`
             .Statusbar {
-              background-color: var(--black);
               font-size: 0.8rem;
               color: var(--white);
               padding: 0.7rem;
@@ -33,31 +32,26 @@ class Statusbar extends Component {
             }
 
             .Statusbar__headline {
-              color: var(--blue);
+              color: var(--carmine);
               margin-bottom: 0.1em;
               font-weight: 400;
             }
 
             .Statusbar__link {
+              color: var(--vermilion);
               font-weight: 300;
               text-decoration: none;
-              opacity: 0.5;
               transition: opacity 150ms ease, color 150ms ease;
             }
 
             .Statusbar__link:hover {
-              color: var(--blue);
+              color: var(--carmine);
               opacity: 1;
             }
 
             .Statusbar__content--italic {
               font-style: italic;
             }
-
-            button {
-              color: var(--black);
-            }
-
           `}</style>
         </div>
       );
