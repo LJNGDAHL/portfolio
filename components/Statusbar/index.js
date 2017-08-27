@@ -16,48 +16,62 @@ class Statusbar extends Component {
 
       return (
         <div className="Statusbar">
-          <p className="Statusbar__headline">Latest Git Commit ({created})</p>
-          <p className="Statusbar__content">{commit}
-            <a className="Statusbar__link" href={repoURL}> in {repo}</a>
+          <p className="StatusbarHeadline">Latest Git Commit ({ created })</p>
+          <p className="u-italic">{ commit }
+            <a className="StatusbarLink" href={ repoURL }> in { repo }</a>
           </p>
           <style jsx>{`
             .Statusbar {
-              font-size: 0.8rem;
+              background-color: var(--black);
+              bottom: -2rem;
               color: var(--white);
-              padding: 0.7rem;
+              font-size: 1rem;
+              left: 10%;
+              opacity: 0;
+              padding: 2rem 2.5rem 3rem;
               position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 100%;
+              transform: translateY(100%);
+              width: 25rem;
+              animation-name: slideIn;
+              animation-duration: 800ms;
+              animation-delay: 750ms;
+              animation-fill-mode: forwards;
             }
 
-            .Statusbar__headline {
-              color: var(--carmine);
+            @keyframes slideIn {
+              from {
+              opacity: 0;
+              transform: translateY(100%);
+              }
+              to {
+              opacity: 1;
+              transform: none
+              }
+            }
+
+            .StatusbarHeadline {
               margin-bottom: 0.1em;
-              font-weight: 400;
+              font-weight: 700;
+              text-transform: uppercase;
             }
 
-            .Statusbar__link {
-              color: var(--vermilion);
+            .StatusbarLink {
+              color: var(--yellow);
               font-weight: 300;
               text-decoration: none;
               transition: opacity 150ms ease, color 150ms ease;
             }
 
-            .Statusbar__link:hover {
+            .StatusbarLink:hover {
               color: var(--carmine);
               opacity: 1;
-            }
-
-            .Statusbar__content--italic {
-              font-style: italic;
             }
           `}</style>
         </div>
       );
     } else {
       return (
-        <div className="Statusbar"></div>
+        <div></div>
       );
     }
   }

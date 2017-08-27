@@ -1,7 +1,8 @@
 import Global from '../Global';
 
-const Tags = ({ tags }) => (
-  <div>
+const Tags = ({ tags, styles }) => (
+  <div className={ styles }>
+    <h3 className="TagsHeadline">Using</h3>
     <ul className="u-noPadding">
       {tags.map(tag => (
         <li className="Tag" key={ tag }><span className="innerTag">{ tag }</span></li>
@@ -9,28 +10,36 @@ const Tags = ({ tags }) => (
     </ul>
     <Global />
     <style jsx>{`
-    .Tag {
-      display: inline-block;
-      color: var(--egyptian);
-
-      padding: 0.5rem 1rem;
-      list-style-type: none;
-      position: relative;
-      margin: 0.5rem 0;
-
+    .Tags {
+      background-color: var(--egyptian);
+      color: var(--white);
+      flex-shrink: 0;
+      margin-right: 2rem;
+      max-height: 0;
+      overflow: hidden;
+      text-align: center;
+      transition: max-height 500ms ease-out 600ms, opacity 500ms ease-out 600ms;
+      width: 30%;
     }
 
-    {/* Adds a skewed vertical line between the tags */}
-    .Tag:not(:last-of-type)::after {
-        bottom: 0;
-        border-right: 2px solid var(--egyptian);
-        content: "";
-        height: 100%;
-        width: 100%;
-        left: 0;
-        transform: skewX(-25deg);
-        position: absolute;
-      }
+    .TagsHeadline {
+      text-transform: uppercase;
+      margin-top: 1.4rem;
+    }
+
+    .Tags.expanded {
+      max-height: 300px;
+    }
+
+    .Tag {
+      color: inherit;
+      list-style-type: none;
+      position: relative;
+    }
+
+    .Tag:last-of-type {
+      margin-bottom: 1rem;
+    }
     `}
     </style>
   </div>

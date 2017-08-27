@@ -8,33 +8,37 @@ export default function Global() {
         --egyptian: #0C7BF9;
         --vermilion: #ED403A;
         --carmine: #F43029;
-        --white: #F9F9F9;
 
-        {/* TODO: Figure out what to do with this */}
-        background-color: var(--midnight);
+        --black: #0F0E0E;
+        --white: #F9F9F9;
+        --greyish: #F2F2F2;
+        --yellow: #F8E981;
+        --lightYellow: #F9F7E7;
       }
 
-      @font-face {
-        font-family: 'Lazer84';
-        src: url('../static/fonts/lazer84-webfont.woff2') format('woff2'),
-            url('../static/fonts/lazer84-webfont.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+      html {
+        background-color: var(--greyish);
       }
 
       * {
         box-sizing: border-box;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 300;
+        font-family: 'Libre Baskerville', serif;
+        font-weight: 400;
         color: currentColor;
         margin: 0;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
       }
 
       /**
       * Font sizes
       */
+      .u-fontXL {
+        font-size: 7rem !important;
+      }
+
       .u-fontL {
-        font-size: 3rem !important;
+        font-size: 2.5rem !important;
       }
 
       .u-fontM {
@@ -56,25 +60,59 @@ export default function Global() {
         text-transform: uppercase !important;
       }
 
+      .u-italic {
+        font-style: italic !important;
+      }
+
+      .u-fontSmoothing {
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+      }
+
       .u-semiBold {
         font-weight: 400 !important;
       }
 
-      .u-colorCarmine {
-        color: var(--carmine);
+
+      /**
+       * Colors
+       */
+      .u-colorWhite {
+        color: var(--white) !important;
+      }
+
+      .u-colorYellow {
+        color: var(--yellow) !important;
       }
 
       /**
       * Margins and paddings
       */
+      .u-marginTopXL {
+        margin-top: 30vh !important;
+      }
       .u-marginBottom {
         margin-bottom: 1rem !important;
+      }
+
+      .u-marginAuto {
+        margin: 0 auto !important;
       }
 
       .u-noPadding {
         padding: 0 !important;
       }
 
+      /**
+      * Flex utilities
+      */
+      .u-flex {
+        display: flex !important;
+      }
+
+      .u-alignStart {
+        align-items: flex-start !important;
+      }
     `}
     </style>
   );

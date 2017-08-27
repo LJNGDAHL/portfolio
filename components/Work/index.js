@@ -38,7 +38,7 @@ class Work extends Component {
     if (inOrAboveView(this.mainContainer) && notAdded) {
       this.props.dispatch(workInView(this.props.id));
       // Stop listening once component is added in list.
-      window.removeEventListener('scroll', debounce(this.hasEnteredView));
+      window.removeEventListener('scroll', this.hasEnteredView);
     }
   }
 
@@ -55,9 +55,11 @@ class Work extends Component {
       <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ isOpen ? 'Work expanded' : 'Work' } >
         <div className={ hasBeenInView ? 'Work__textcontainer visible' : 'Work__textcontainer' } >
           <h3 className="u-fontL u-semiBold u-upperCase u-colorCarmine">{ work.headline }</h3>
-          <Tags tags={ work.tags } />
           <p className="u-fontM u-marginBottom">{ work.introduction }</p>
-          <p className={ isOpen ? 'Work__detailed expanded' : 'Work__detailed' } >{ work.content }</p>
+          <div className="u-flex u-alignStart">
+            <Tags tags={ work.tags } styles={ isOpen ? 'Tags expanded' : 'Tags' } />
+            <p className={ isOpen ? 'Work__detailed expanded' : 'Work__detailed' } >{ work.content }</p>
+          </div>
           <WorkLink id={ this.props.id } onClick={ this.handleClick }>
             { isOpen ? 'Close' : 'Read More' }
           </WorkLink>

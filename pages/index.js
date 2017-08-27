@@ -72,8 +72,10 @@ class Index extends Component {
         <Global />
         <style jsx>{`
           .Content {
-            background-color: var(--midnight);
+            background-color: var(--greyish);
             color: var(--white);
+            {/* top padding to make it work with absolute positioned hero */}
+            padding-top: 100vh;
           }
           `}</style>
       </div>
