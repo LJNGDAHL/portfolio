@@ -4,11 +4,6 @@ export default function Global() {
   return (
     <style jsx global>{`
       :root {
-        --midnight: #140F30;
-        --egyptian: #0C7BF9;
-        --vermilion: #ED403A;
-        --carmine: #F43029;
-
         --black: #0F0E0E;
         --white: #F9F9F9;
         --greyish: #F2F2F2;
@@ -50,7 +45,7 @@ export default function Global() {
       }
 
       .u-fontXS {
-        font-size: 1.2rem !important;
+        font-size: 0.9rem !important;
       }
 
       /**
@@ -64,6 +59,10 @@ export default function Global() {
         font-style: italic !important;
       }
 
+      .u-lineHeightL {
+        line-height: 1.5 !important;
+      }
+
       .u-fontSmoothing {
         -webkit-font-smoothing: antialiased;
         font-smoothing: antialiased;
@@ -71,6 +70,10 @@ export default function Global() {
 
       .u-semiBold {
         font-weight: 400 !important;
+      }
+
+      .u-bold {
+        font-weight: 700 !important;
       }
 
 
@@ -91,6 +94,11 @@ export default function Global() {
       .u-marginTopXL {
         margin-top: 30vh !important;
       }
+
+      .u-marginTopS {
+        margin-top: 0.5rem !important;
+      }
+
       .u-marginBottom {
         margin-bottom: 1rem !important;
       }

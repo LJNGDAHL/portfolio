@@ -16,14 +16,14 @@ class Statusbar extends Component {
 
       return (
         <div className="Statusbar">
-          <p className="StatusbarHeadline">Latest Git Commit ({ created })</p>
+          <p className="u-bold u-upperCase">Latest Git Commit ({ created })</p>
           <p className="u-italic">{ commit }
             <a className="StatusbarLink" href={ repoURL }> in { repo }</a>
           </p>
           <style jsx>{`
             .Statusbar {
               background-color: var(--black);
-              bottom: -2rem;
+              bottom: -4rem;
               color: var(--white);
               font-size: 1rem;
               left: 10%;
@@ -33,8 +33,8 @@ class Statusbar extends Component {
               transform: translateY(100%);
               width: 25rem;
               animation-name: slideIn;
-              animation-duration: 800ms;
-              animation-delay: 750ms;
+              animation-duration: 600ms;
+              animation-delay: 1750ms;
               animation-fill-mode: forwards;
             }
 
@@ -49,22 +49,14 @@ class Statusbar extends Component {
               }
             }
 
-            .StatusbarHeadline {
-              margin-bottom: 0.1em;
-              font-weight: 700;
-              text-transform: uppercase;
-            }
-
             .StatusbarLink {
               color: var(--yellow);
-              font-weight: 300;
               text-decoration: none;
-              transition: opacity 150ms ease, color 150ms ease;
+              transition: color 150ms ease;
             }
 
             .StatusbarLink:hover {
               color: var(--carmine);
-              opacity: 1;
             }
           `}</style>
         </div>

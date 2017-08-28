@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import githubData from './responses';
+import { githubData, hasJS } from './responses';
 import works from './works';
 
 const rootReducer = combineReducers({
+  hasJS,
   githubData,
   works,
   routing

@@ -7,46 +7,34 @@ const WorkLink = ({ id, onClick, children }) => (
     <Global />
     <style jsx>{`
     .Link {
-        border: 2px solid var(--carmine);
-        color: var(--white);
-        cursor: pointer;
+        border-bottom: 4px solid var(--yellow);
         display: block;
+        width: 10rem;
         font-size: 1.2rem;
-        font-weight: 400;
-        max-width: 15rem;
-        margin: 2rem auto 2rem;
-        text-align: center;
+        font-weight: 700;
         transition: all 300ms ease;
-        padding: 0.7rem 3rem 0.5rem;
+        padding: 0.7rem 0.2em 0.5rem;
         position: relative;
         text-transform: uppercase;
         text-decoration: none;
-        font-smoothing: antialiased;
-        -webkit-font-smoothing: antialiased;
       }
 
       .Link::after {
-        background: var(--white);
+        background: var(--yellow);
+        bottom: 0;
         content: "";
         height: 0;
-        width: 100%;
-        bottom: 0;
         left: 0;
         opacity: 1;
         position: absolute;
         transition: height 250ms ease;
+        width: 100%;
         z-index: -1;
-      }
-
-      .Link:hover {
-        border: 2px solid var(--white);
-        color: var(--carmine);
       }
 
       .Link:hover::after {
         height: 100%;
       }
-
     `}
     </style>
   </div>

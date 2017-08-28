@@ -1,3 +1,11 @@
+export const HAS_JS = 'HAS_JS';
+export function hasJS(haz) {
+  return {
+    type: HAS_JS,
+    hasJS: haz
+  };
+}
+
 export const ADD_GITHUB_DATA = 'ADD_GITHUB_DATA';
 export function addGithubData(data) {
   return {
@@ -13,6 +21,7 @@ export function addWorks(works) {
     works
   };
 }
+
 
 export const TOGGLE_WORK = 'TOGGLE_WORK';
 export function toggleWork(work) {

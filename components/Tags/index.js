@@ -1,45 +1,45 @@
 import Global from '../Global';
 
-const Tags = ({ tags, styles }) => (
-  <div className={ styles }>
-    <h3 className="TagsHeadline">Using</h3>
-    <ul className="u-noPadding">
+const Tags = ({ tags }) => (
+  <div className="Tags">
+    <h3 className="u-upperCase u-italic">Libraries and frameworks</h3>
+    <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and framworks: </p>
+    <ul className="TagList">
       {tags.map(tag => (
-        <li className="Tag" key={ tag }><span className="innerTag">{ tag }</span></li>
+        <li className="Tag" key={ tag }>{ tag }</li>
       ))}
     </ul>
     <Global />
     <style jsx>{`
-    .Tags {
-      background-color: var(--egyptian);
-      color: var(--white);
-      flex-shrink: 0;
-      margin-right: 2rem;
-      max-height: 0;
-      overflow: hidden;
-      text-align: center;
-      transition: max-height 500ms ease-out 600ms, opacity 500ms ease-out 600ms;
-      width: 30%;
-    }
+      .Tags {
+        background-color: var(--black);
+        color: var(--white);
+        margin: 0 auto;
+        padding: 2rem 2.4rem 3rem;
+        width: 100%;
+      }
 
-    .TagsHeadline {
-      text-transform: uppercase;
-      margin-top: 1.4rem;
-    }
+      .TagList {
+        padding-left: 1rem;
+        list-style-image: url(../../static/media/plus.svg);
+      }
 
-    .Tags.expanded {
-      max-height: 300px;
-    }
+      .Tag {
+        line-height: 1.5;
+      }
 
-    .Tag {
-      color: inherit;
-      list-style-type: none;
-      position: relative;
-    }
+      .Tag:first-letter {
+        text-transform: uppercase;
+      }
 
-    .Tag:last-of-type {
-      margin-bottom: 1rem;
-    }
+      /**
+      * Media Queries
+      */
+      @media screen and (min-width: 900px) {
+        .Tags {
+          width: 15rem;
+        }
+      }
     `}
     </style>
   </div>

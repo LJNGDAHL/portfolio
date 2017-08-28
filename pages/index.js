@@ -3,7 +3,7 @@ import withRedux from 'next-redux-wrapper';
 import fetch from 'isomorphic-unfetch'; // For using fetch in both client/server
 
 import content from '../content'; // Replace with CMS in future
-import { addGithubData, addWorks } from '../actions';
+import { hasJS, addGithubData, addWorks } from '../actions';
 import initStore from '../store';
 
 import Global from '../components/Global';
@@ -35,6 +35,7 @@ class Index extends Component {
     // Use to check if Github data is already added in Redux
     const includesData = Object.prototype.hasOwnProperty.call(store.getState().githubData, 'data');
 
+
     // FIXME: Fix Github Data so that you dont have to call data.data.
     if (!includesData) {
       store.dispatch(addGithubData(data));
@@ -51,17 +52,12 @@ class Index extends Component {
   */
   componentWillMount() {
     this.props.dispatch(addWorks(content));
+    this.props.dispatch(hasJS(typeof window !== 'undefined'));
   }
-
-  // Use "has-js" to determine whether or not js is enabled. Used in styling.
-  componentDidMount() {
-    document.documentElement.classList.add('has-js');
-  }
-
 
   render() {
     return (
-      <div className="u-backgroundMidnight">
+      <div className={ this.props.hasJS ? 'has-js' : '' }>
         <Hero />
         <div className="Content">
           { this.props.works.map(item => (
@@ -72,10 +68,8 @@ class Index extends Component {
         <Global />
         <style jsx>{`
           .Content {
-            background-color: var(--greyish);
             color: var(--white);
-            {/* top padding to make it work with absolute positioned hero */}
-            padding-top: 100vh;
+            padding-top: 120vh;
           }
           `}</style>
       </div>
@@ -83,4 +77,6 @@ class Index extends Component {
   }
 }
 
-export default withRedux(initStore)(Index);
+export default withRedux(initStore, state => ({
+  hasJS: state.hasJS
+}))(Index);
