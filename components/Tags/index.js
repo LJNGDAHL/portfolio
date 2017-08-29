@@ -7,7 +7,7 @@ import Global from '../Global';
 const Tags = ({ tags, negativeStyling }) => (
   <div className={ negativeStyling ? 'Tags Tags--negative' : 'Tags' }>
     <h3 className="u-upperCase u-italic">Libraries and frameworks</h3>
-    <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and framworks:</p>
+    <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and frameworks:</p>
     <ul className="TagList">
       { tags.map(tag => (
         <li className="Tag" key={ tag }>{ tag }</li>

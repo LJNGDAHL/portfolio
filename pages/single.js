@@ -25,6 +25,10 @@ class Single extends Component {
   componentWillMount() {
     this.props.dispatch(addWorks(content));
     this.props.dispatch(hasJS(typeof window !== 'undefined'));
+
+    if (typeof window !== 'undefined') {
+      document.querySelector('html').setAttribute('lang', 'en');
+    }
   }
 
   render() {
