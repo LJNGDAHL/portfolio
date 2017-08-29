@@ -1,5 +1,8 @@
 import { ADD_GITHUB_DATA, HAS_JS } from '../actions';
 
+/**
+ * Update state when javascript is enabled
+ */
 export const hasJS = (state = false, action) => {
   switch (action.type) {
   case HAS_JS: {
@@ -10,6 +13,9 @@ export const hasJS = (state = false, action) => {
   }
 };
 
+/**
+ * Add data fetched from Github (used in Statusbar Component)
+ */
 export const githubData = (state = {}, action) => {
   switch (action.type) {
   case ADD_GITHUB_DATA: {

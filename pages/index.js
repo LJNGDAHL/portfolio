@@ -22,8 +22,8 @@ class Index extends Component {
      */
     if (!data || !((Date.now() - data.time) < 3600000)) {
       try {
-        console.log('New fetch');
         const res = await fetch('http://dog.ceo/api/breeds/image/random');
+        // TODO: Replace dog stuff with real stuff
         // const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
         data = await res.json();
         data.time = Date.now();
@@ -32,11 +32,10 @@ class Index extends Component {
       }
     }
 
-    // Use to check if Github data is already added in Redux
+    // Check if Github data is already added in Redux
     const includesData = Object.prototype.hasOwnProperty.call(store.getState().githubData, 'data');
 
-
-    // FIXME: Fix Github Data so that you dont have to call data.data.
+    // Dispatch action if Github data is not already added
     if (!includesData) {
       store.dispatch(addGithubData(data));
     }

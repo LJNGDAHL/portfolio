@@ -4,6 +4,9 @@ import { Component } from 'react';
 // TODO: Only to be used during testing
 import { githubResponse } from '../../utils';
 
+/**
+ * Displays data from Github regarding latest commit.
+ */
 class Statusbar extends Component {
   render() {
     if (this.props.data) {
@@ -22,6 +25,7 @@ class Statusbar extends Component {
           </p>
           <style jsx>{`
             .Statusbar {
+              animation: slideIn 600ms 1000ms forwards var(--slide);
               background-color: var(--black);
               bottom: -4rem;
               color: var(--white);
@@ -32,31 +36,27 @@ class Statusbar extends Component {
               position: absolute;
               transform: translateY(100%);
               width: 25rem;
-              animation-name: slideIn;
-              animation-duration: 600ms;
-              animation-delay: 1750ms;
-              animation-fill-mode: forwards;
             }
 
             @keyframes slideIn {
-              from {
-              opacity: 0;
-              transform: translateY(100%);
+              0% {
+                opacity: 0;
+                transform: translateY(100%);
               }
-              to {
-              opacity: 1;
-              transform: none
+              100% {
+                opacity: 1;
+                transform: none
               }
             }
 
             .StatusbarLink {
               color: var(--yellow);
               text-decoration: none;
-              transition: color 150ms ease;
+              transition: color 300ms ease;
             }
 
             .StatusbarLink:hover {
-              color: var(--carmine);
+              color: var(--white);
             }
           `}</style>
         </div>

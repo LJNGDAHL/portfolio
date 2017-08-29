@@ -10,14 +10,17 @@ import { toggleWork, workInView } from '../../actions';
 
 import { inOrAboveView } from '../../utils';
 
+/**
+ * The main component in portfolio.
+ * Used to display different works.
+ */
 class Work extends Component {
-  // Expand work item on index.js
+  // Prevents routing to single.js if javascript is enabled
   handleClick = (e) => {
     e.preventDefault();
     this.props.dispatch(toggleWork(this.props.id));
     const index = this.props.open.indexOf(this.props.id);
 
-    // Enables link to single work page on reload (or if javascript is disabled)
     if (index !== -1) {
       Router.push('/');
     } else {
@@ -38,6 +41,7 @@ class Work extends Component {
       // Add Component in list, if not already added
       if (inOrAboveView(this.mainContainer) && notAdded) {
         this.props.dispatch(workInView(this.props.id));
+
         // Stop listening once component is added in list.
         window.removeEventListener('scroll', this.onscroll);
       }
@@ -71,9 +75,6 @@ class Work extends Component {
           </div>
           <Global />
           <style jsx>{`
-            /**
-             * Main Component Styling
-             */
             .Work {
               background-color: var(--white);
               color: var(--black);
@@ -84,9 +85,7 @@ class Work extends Component {
             }
 
             :global(.has-js) .Work.visible {
-              animation-name: worksFadeIn;
-              animation-duration: 800ms;
-              animation-fill-mode: forwards;
+              animation: works 800ms forwards var(--slide);
             }
 
             /**
@@ -107,10 +106,7 @@ class Work extends Component {
             }
 
             :global(.has-js) .Work.visible::after {
-              animation-name: worksFadeIn;
-              animation-duration: 800ms;
-              animation-delay: 200ms;
-              animation-fill-mode: forwards;
+              animation: works 800ms 200ms forwards var(--slide);
             }
 
             /**
@@ -126,10 +122,7 @@ class Work extends Component {
             }
 
             :global(.has-js) .Work.visible .WorkContent  {
-              animation-name: worksFadeIn;
-              animation-duration: 800ms;
-              animation-fill-mode: forwards;
-              animation-delay: 500ms;
+              animation: works 1000ms 500ms forwards var(--slide);
             }
 
             /**
@@ -140,10 +133,7 @@ class Work extends Component {
             }
 
             :global(.has-js) .Work.visible .TagsContainer  {
-              animation-name: worksFadeIn;
-              animation-duration: 800ms;
-              animation-fill-mode: forwards;
-              animation-delay: 1000ms;
+              animation: works 800ms 1000ms forwards var(--slide);
             }
 
             /**
@@ -154,7 +144,7 @@ class Work extends Component {
               overflow: hidden;
               opacity: 0;
               padding-bottom: 2rem;
-              transition: all 500ms ease-out 100ms;
+              transition: all 600ms ease-in 100ms;
             }
 
             .Details.expanded {
@@ -162,9 +152,7 @@ class Work extends Component {
               opacity: 1;
             }
 
-
-            {/* Used for sliding in content */}
-            @keyframes worksFadeIn {
+            @keyframes works {
               0% {
                 opacity: 0;
                 transform: translateY(0);

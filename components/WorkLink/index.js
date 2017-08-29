@@ -1,6 +1,8 @@
-import Link from 'next/link'; // TODO: Use Link?
 import Global from '../Global';
 
+/**
+ * Used in Work Component
+ */
 const WorkLink = ({ id, onClick, children }) => (
   <div>
     <a className="Link" href={`/work/${id}`} onClick={ onClick }>{ children }</a>
@@ -9,14 +11,14 @@ const WorkLink = ({ id, onClick, children }) => (
     .Link {
         border-bottom: 4px solid var(--yellow);
         display: block;
-        width: 10rem;
         font-size: 1.2rem;
         font-weight: 700;
         transition: all 300ms ease;
-        padding: 0.7rem 0.2em 0.5rem;
+        padding: 0.7rem 0.2rem 0.5rem;
         position: relative;
-        text-transform: uppercase;
         text-decoration: none;
+        text-transform: uppercase;
+        width: 10rem;
       }
 
       .Link::after {

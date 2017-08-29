@@ -2,11 +2,9 @@
  * Gets viewport height
  * @return {Number}
  */
-export const vh = () => {
-  return (
-    Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
-  );
-};
+export const vh = () => (
+  Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+);
 
 /**
  * Checks if element is in or above viewport
@@ -18,7 +16,7 @@ export const inOrAboveView = (element) => {
     return true;
   }
   return false;
-}
+};
 
 /* eslint-disable */
 // TODO: Remove, only to be used during testing.

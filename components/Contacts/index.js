@@ -1,5 +1,8 @@
 import Global from '../Global';
 
+/**
+ * Displayed in top right corner.
+ */
 const Contacts = () => {
   return (
     <div className="Contacts">
@@ -11,58 +14,40 @@ const Contacts = () => {
       <style jsx>{`
         .Contacts {
           background-color: var(--white);
-          position: absolute;
+          font-size: 0.9rem;
           height: 70vh;
           line-height: 1.2;
-          top: 0;
-          right: 0;
           padding: 1.5rem 2rem 0;
+          position: absolute;
+          right: 0;
           text-align: right;
-          font-size: 0.9rem;
+          top: 0;
           z-index: -1;
         }
 
-        {/* Used on all elements in Contacts component to make them slide in */}
-        @keyframes contactsSlide {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
         .ContactsHeadline {
-          animation-name: contactsSlide;
-          animation-duration: 800ms;
+          animation: contacts 800ms var(--slide);
           font-weight: 700;
           font-size: inherit;
           text-transform: uppercase;
           padding: 0.1rem 0.5rem;
         }
 
-        .ContactsMail {
-          animation-name: contactsSlide;
-          animation-duration: 800ms;
-          animation-delay: 200ms;
-          transform: translateX(0);
-        }
-
-        .ContactsPhone {
-          animation-name: contactsSlide;
-          animation-duration: 800ms;
-          animation-delay: 400ms;
-          transform: translateX(0);
-        }
-
-
         .ContactsLink {
           display: block;
           margin-left: 10rem;
           text-decoration: none;
           padding: 0.1rem 0.5rem;
+        }
+
+        .ContactsMail {
+          animation: contacts 800ms 200ms var(--slide);
+          transform: translateX(0);
+        }
+
+        .ContactsPhone {
+          animation: contacts 800ms 400ms var(--slide);
+          transform: translateX(0);
         }
 
         {/* Yellow background that animates from right to left */}
@@ -81,6 +66,17 @@ const Contacts = () => {
 
         .ContactsLink:hover::after {
           width: 100%;
+        }
+
+        @keyframes contacts {
+          0% {
+            opacity: 0;
+            transform: translateX(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
       `}</style>
     </div>

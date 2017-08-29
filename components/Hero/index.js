@@ -3,7 +3,11 @@ import Header from '../Header';
 import Statusbar from '../Statusbar';
 import Global from '../Global';
 
-export default function Hero() {
+/**
+ * Content of initial first view
+ * (above the fold)
+ */
+const Hero = () => {
   return (
     <div className="Hero">
       <Header />
@@ -12,7 +16,7 @@ export default function Hero() {
         <h1 className="u-colorWhite u-italic u-fontL">Katarina Ljungdahl</h1>
         <h2 className="u-colorYellow u-bold u-fontXL">Developer</h2>
       </div>
-      <img className="CoverImage" src="../../static/media/cover.jpg" />
+      <img className="HeroImage" src="../../static/media/cover.jpg" />
       <Statusbar />
       <Global />
       <style jsx>{`
@@ -29,25 +33,22 @@ export default function Hero() {
           text-transform: uppercase;
         }
 
-        .CoverImage {
-          animation-name: coverImage;
-          animation-duration: 1000ms;
-          animation-fill-mode: forwards;
-          animation-delay: 500ms;
+        .HeroImage {
+          animation: HeroImage 1000ms 500ms forwards var(--slide);
           left: 5vw;
-          top: 15vh;
-          width: 90vw;
           opacity: 0;
           position: absolute;
+          top: 15vh;
+          width: 90vw;
           z-index: -1;
         }
 
-        @keyframes coverImage {
-          from {
+        @keyframes HeroImage {
+          0% {
             opacity: 0;
             transform: translateY(50%);
           }
-          to {
+          100% {
             opacity: 1;
             transform: none
           }
@@ -56,3 +57,5 @@ export default function Hero() {
     </div>
   );
 }
+
+export default Hero;

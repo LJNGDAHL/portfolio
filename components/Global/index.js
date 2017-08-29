@@ -1,6 +1,8 @@
-// These are the global styles imported on every page.
-// Using with SUIT CSS naming convention.
-export default function Global() {
+/**
+ * These are the global styles imported on every page.
+ * Using with SUIT CSS naming convention.
+ */
+const Global = () => {
   return (
     <style jsx global>{`
       :root {
@@ -9,6 +11,7 @@ export default function Global() {
         --greyish: #F2F2F2;
         --yellow: #F8E981;
         --lightYellow: #F9F7E7;
+        --slide: cubic-bezier(0.075, 0.82, 0.165, 1);
       }
 
       html {
@@ -124,4 +127,6 @@ export default function Global() {
     `}
     </style>
   );
-}
+};
+
+export default Global;

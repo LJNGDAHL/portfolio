@@ -1,13 +1,17 @@
 import Global from '../Global';
 
+/**
+ * Used in Works Component to display frameworks and libraries used in
+ * current project.
+ */
 const Tags = ({ tags }) => (
   <div className="Tags">
     <h3 className="u-upperCase u-italic">Libraries and frameworks</h3>
-    <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and framworks: </p>
+    <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and framworks:</p>
     <ul className="TagList">
-      {tags.map(tag => (
+      { tags.map(tag => (
         <li className="Tag" key={ tag }>{ tag }</li>
-      ))}
+      )) }
     </ul>
     <Global />
     <style jsx>{`
