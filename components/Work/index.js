@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import nanoraf from 'nanoraf';
 
+import { toggleWork, workInView } from '../../actions';
+import { inOrAboveView } from '../../utils';
+
 import Global from '../Global';
+import ExternalLink from '../ExternalLink';
 import WorkLink from '../WorkLink';
 import Tags from '../Tags';
-import { toggleWork, workInView } from '../../actions';
-
-import { inOrAboveView } from '../../utils';
 
 /**
  * The main component in portfolio.
@@ -62,6 +63,7 @@ class Work extends Component {
     return (
       <div>
         <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ hasBeenInView ? 'Work visible' : 'Work' }>
+          <ExternalLink url={ work.link }>{ work.link }</ExternalLink>
           <div className="WorkContent">
             <h3 className="u-fontL u-bold u-upperCase">{ work.headline }</h3>
             <p className="u-fontM u-marginBottom u-italic">{ work.introduction }</p>
