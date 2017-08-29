@@ -1,5 +1,8 @@
 import Global from '../Global';
 
+/**
+ * Used in Works Component, top right corner.
+ */
 const ExternalLink = ({ url, children }) => {
   return (
     <div>
@@ -16,15 +19,15 @@ const ExternalLink = ({ url, children }) => {
           padding: 0.4em;
           text-decoration: none;
           top: 0;
+          z-index: 10;
         }
 
-        {/* Yellow background that animates from right to left */}
+        {/* Yellow background that animates height */}
         .ExternalLink::after {
           background: var(--yellow);
           bottom: 0;
           content: "";
           height: 0;
-          opacity: 1;
           position: absolute;
           right: 0;
           transition: height 250ms var(--slide);

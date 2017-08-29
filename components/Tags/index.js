@@ -4,8 +4,8 @@ import Global from '../Global';
  * Used in Works Component to display frameworks and libraries used in
  * current project.
  */
-const Tags = ({ tags }) => (
-  <div className="Tags">
+const Tags = ({ tags, negativeStyling }) => (
+  <div className={ negativeStyling ? 'Tags Tags--negative' : 'Tags' }>
     <h3 className="u-upperCase u-italic">Libraries and frameworks</h3>
     <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and framworks:</p>
     <ul className="TagList">
@@ -21,6 +21,10 @@ const Tags = ({ tags }) => (
         margin: 0 auto;
         padding: 2rem 2.4rem 3rem;
         width: 100%;
+      }
+
+      .Tags--negative {
+        border: 1px solid var(--greyish);
       }
 
       .TagList {

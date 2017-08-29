@@ -31,6 +31,7 @@ const Hero = () => {
         .Title {
           margin: 30vh auto;
           text-transform: uppercase;
+          z-index: 2;
         }
 
         .Name {
@@ -50,13 +51,31 @@ const Hero = () => {
         }
 
         .HeroImage {
+          display: block;
           animation: hero 1000ms 500ms forwards var(--slide);
           left: 5vw;
           opacity: 0;
           position: absolute;
           top: 15vh;
           width: 90vw;
-          z-index: -1;
+          z-index: 0;
+        }
+
+        /**
+        * Sweet Yellow Box (only for appearance)
+        */
+        .Hero::after {
+          animation: hero 1000ms 700ms forwards var(--slide);
+          background-color: var(--transparentYellow);
+          content: "";
+          width: 70vw;
+          height: 90vh;
+          margin: 2rem 1rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          z-index: -2;
         }
 
         @keyframes hero {

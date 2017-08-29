@@ -59,21 +59,44 @@ class Work extends Component {
     const work = this.props.works.find(item => item.id === this.props.id);
     const isOpen = (this.props.open.indexOf(this.props.id) !== -1);
     const hasBeenInView = (this.props.inOrAboveView.indexOf(this.props.id) !== -1);
+    const oddNumber = ((this.props.works.indexOf(work) % 2) !== 0);
 
     return (
       <div>
-        <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ hasBeenInView ? 'Work visible' : 'Work' }>
-          <ExternalLink url={ work.link }>{ work.link }</ExternalLink>
-          <div className="WorkContent">
-            <h3 className="u-fontL u-bold u-upperCase">{ work.headline }</h3>
-            <p className="u-fontM u-marginBottom u-italic">{ work.introduction }</p>
-            <p className={ isOpen ? 'Details expanded' : 'Details' } >{ work.content }</p>
-            <WorkLink id={ this.props.id } onClick={ this.handleClick }>
-              { isOpen ? 'Close' : 'Read More' }
-            </WorkLink>
-          </div>
-          <div className="TagsContainer">
-            <Tags tags={ work.tags } />
+        <div className={ oddNumber ? 'Negative' : null } >
+          <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ hasBeenInView ? 'Work Work--visible' : 'Work' }>
+            <ExternalLink url={ work.link }>{ work.link }</ExternalLink>
+
+            {/* Sweet yellow box for decoration */}
+            { this.props.single ?
+              <div className="Decoration Decoration--single"></div> :
+              <div className="Decoration"></div>
+            }
+
+            <div className="WorkContent">
+              <h3 className="u-fontL u-bold u-upperCase">{ work.headline }</h3>
+              <p className="u-fontM u-marginBottom u-italic">{ work.introduction }</p>
+
+              {/* When on single page, details is always visible  */}
+              { this.props.single ?
+                <p className="Details--single">{ work.content }</p>
+                :
+                <div>
+                  <p className={ isOpen ? 'Details Details--visible' : 'Details' } >{ work.content }</p>
+                  <WorkLink
+                    url={`/work/${this.props.id}`}
+                    id={ this.props.id }
+                    onClick={ this.handleClick }
+                    negativeStyling={ oddNumber } >
+                    { isOpen ? 'Close' : 'Read More' }
+                  </WorkLink>
+                </div>
+              }
+
+            </div>
+            <div className="TagsContainer">
+              <Tags negativeStyling={ oddNumber } tags={ work.tags } />
+            </div>
           </div>
           <Global />
           <style jsx>{`
@@ -86,28 +109,48 @@ class Work extends Component {
               position: relative;
             }
 
-            :global(.has-js) .Work.visible {
+            .Negative .Work {
+              background-color: var(--black);
+              color: var(--white);
+            }
+
+            :global(.has-js) .Work--visible {
               animation: works 800ms forwards var(--slide);
             }
 
             /**
              * Sweet Yellow Box (only for appearance)
              */
-            .Work::after {
+            .Decoration {
               background-color: var(--yellow);
               content: "";
-              width: 200px;
+              width: 10rem;
               height: 20rem;
               position: absolute;
               top: 2rem;
-              z-index: -2;
+              z-index: 1;
             }
 
-            :global(.has-js) .Work::after {
+            .Decoration--single {
+              top: 4rem;
+              opacity: 0;
+              animation: works 600ms 400ms forwards var(--slide);
+              z-index: 1;
+            }
+
+            .Negative .Decoration {
+              background-color: var(--transparentYellow);
+              width: 70%;
+              height: 10rem;
+              left: -10%;
+              top: 15rem;
+            }
+
+            :global(.has-js) .Decoration {
               opacity: 0;
             }
 
-            :global(.has-js) .Work.visible::after {
+            :global(.has-js) .Work--visible .Decoration {
               animation: works 800ms 200ms forwards var(--slide);
             }
 
@@ -115,15 +158,17 @@ class Work extends Component {
              * Text content in work component
              */
             .WorkContent {
-              margin: 4rem auto;
+              margin: 2rem auto;
               width: 100%;
+              z-index: 2;
+              position: relative;
             }
 
             :global(.has-js) .WorkContent {
               opacity: 0;
             }
 
-            :global(.has-js) .Work.visible .WorkContent  {
+            :global(.has-js) .Work--visible .WorkContent  {
               animation: works 1000ms 500ms forwards var(--slide);
             }
 
@@ -134,7 +179,7 @@ class Work extends Component {
               opacity: 0;
             }
 
-            :global(.has-js) .Work.visible .TagsContainer  {
+            :global(.has-js) .Work--visible .TagsContainer  {
               animation: works 800ms 1000ms forwards var(--slide);
             }
 
@@ -145,13 +190,20 @@ class Work extends Component {
               max-height: 0;
               overflow: hidden;
               opacity: 0;
-              padding-bottom: 2rem;
               transition: all 600ms ease-in 100ms;
             }
 
-            .Details.expanded {
+            .Details--visible {
+              margin-bottom: 2rem;
               max-height: 300px;
               opacity: 1;
+            }
+
+            /**
+             * When used on single.js, extra padding is needed.
+             */
+            .Details--single {
+              padding-bottom: 7rem;
             }
 
             @keyframes works {

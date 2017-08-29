@@ -24,7 +24,7 @@ const Footer = () => {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          min-height: 30vh;
+          min-height: 40vh;
           text-align: center;
           width: 100%;
         }

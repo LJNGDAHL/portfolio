@@ -11,6 +11,7 @@ const Global = () => {
         --greyish: #F2F2F2;
         --yellow: #F8E981;
         --lightYellow: #F9F7E7;
+        --transparentYellow: rgba(234, 210, 53, 0.5);
         --slide: cubic-bezier(0.075, 0.82, 0.165, 1);
       }
 

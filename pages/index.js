@@ -52,6 +52,10 @@ class Index extends Component {
   componentWillMount() {
     this.props.dispatch(addWorks(content));
     this.props.dispatch(hasJS(typeof window !== 'undefined'));
+
+    if (typeof window !== 'undefined') {
+      document.querySelector('html').setAttribute('lang', 'en');
+    }
   }
 
   render() {
@@ -60,7 +64,7 @@ class Index extends Component {
         <Hero />
         <div className="Content">
           { this.props.works.map(item => (
-            <Work id={ item.id } key={ item.id } />
+            <Work id={ item.id } key={ item.id } single={ false } />
           )) }
           <Footer />
         </div>
