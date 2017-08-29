@@ -17,7 +17,7 @@ const Contacts = () => {
           font-size: 0.9rem;
           height: 70vh;
           line-height: 1.2;
-          padding: 1.5rem 2rem 0;
+          padding: 1rem;
           position: absolute;
           right: 0;
           text-align: right;
@@ -76,6 +76,16 @@ const Contacts = () => {
           100% {
             opacity: 1;
             transform: translateX(0);
+          }
+
+        }
+
+        /**
+        * Media Queries
+        */
+        @media screen and (min-width: 600px) {
+          .Contacts {
+            padding: 1.5rem 2rem 0;
           }
         }
       `}</style>

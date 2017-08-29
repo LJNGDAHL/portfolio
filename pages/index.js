@@ -68,9 +68,21 @@ class Index extends Component {
         <style jsx>{`
           .Content {
             color: var(--white);
-            padding-top: 120vh;
+            padding-top: 90vh;
           }
-          `}</style>
+
+          @media screen and (min-width: 600px) {
+            .Content {
+              padding-top: 120vh;
+            }
+          }
+
+          @media screen and (min-width: 1200px) {
+            .Content {
+              padding-top: 150vh;
+            }
+          }
+        `}</style>
       </div>
     );
   }

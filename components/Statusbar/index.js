@@ -27,15 +27,14 @@ class Statusbar extends Component {
             .Statusbar {
               animation: slideIn 600ms 1000ms forwards var(--slide);
               background-color: var(--black);
-              bottom: -4rem;
+              bottom: 6rem;
               color: var(--white);
-              font-size: 1rem;
-              left: 10%;
+              margin: 5%;
               opacity: 0;
               padding: 2rem 2.5rem 3rem;
               position: absolute;
               transform: translateY(100%);
-              width: 25rem;
+              width: 90%;
             }
 
             @keyframes slideIn {
@@ -57,6 +56,18 @@ class Statusbar extends Component {
 
             .StatusbarLink:hover {
               color: var(--white);
+            }
+
+            /**
+            * Media Queries
+            */
+            @media screen and (min-width: 600px) {
+              .Statusbar {
+                bottom: 1rem;
+                left: 0;
+                margin: 0;
+                width: 25rem;
+              }
             }
           `}</style>
         </div>
