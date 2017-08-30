@@ -30,19 +30,18 @@ export function addWorks(works) {
   };
 }
 
+export const WORK_IN_OR_ABOVE_VIEW = 'WORK_IN_OR_ABOVE_VIEW';
+export function workInView(work) {
+  return {
+    type: WORK_IN_OR_ABOVE_VIEW,
+    id: work
+  };
+}
 
 export const TOGGLE_WORK = 'TOGGLE_WORK';
 export function toggleWork(work) {
   return {
     type: TOGGLE_WORK,
-    id: work
-  };
-}
-
-export const WORK_IN_OR_ABOVE_VIEW = 'WORK_IN_OR_ABOVE_VIEW';
-export function workInView(work) {
-  return {
-    type: WORK_IN_OR_ABOVE_VIEW,
     id: work
   };
 }

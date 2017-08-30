@@ -30,7 +30,9 @@ export default function (state = { items: [], open: [], inOrAboveView: [] }, act
     };
   }
 
-  // Keeps track of which Work Components have been visible in viewport.
+  /**
+   * Keeps track of which Work Components have been visible in viewport.
+   */
   case WORK_IN_OR_ABOVE_VIEW: {
     const inOrAboveView = state.inOrAboveView.slice();
     const index = state.inOrAboveView.indexOf(action.id);

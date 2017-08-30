@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
-import content from '../content'; // Replace with CMS in future
+import content from '../content';
 import { hasJS, addWorks } from '../actions';
 import initStore from '../store';
 
@@ -10,7 +10,6 @@ import Work from '../components/Work';
 import Header from '../components/Header';
 import Contacts from '../components/Contacts';
 import WorkLink from '../components/WorkLink';
-
 
 class Single extends Component {
   static getInitialProps = async (context) => {
@@ -38,7 +37,7 @@ class Single extends Component {
         <Contacts />
         <div className="Content">
           <div className="SingleLink">
-            <WorkLink url='../' negativeStyling={ true }>Go Home</WorkLink>
+            <WorkLink url='../' styles="Link Link--inverted">Go Home</WorkLink>
           </div>
           <div className="WorkContainer">
             <Work id={ this.props.id } key={ this.props.id } single={ true } />

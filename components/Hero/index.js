@@ -34,7 +34,7 @@ class Hero extends Component {
   }
 
   render() {
-    const imageStyle = this.props.heroIsLoaded ? 'HeroImage HeroImage--visible' : 'HeroImage';
+    const imageStyles = this.props.heroIsLoaded ? 'HeroImage HeroImage--visible' : 'HeroImage';
 
     return (
       <div className="Hero">
@@ -44,9 +44,7 @@ class Hero extends Component {
           <h1 className="Name">Katarina Ljungdahl</h1>
           <h2 className="Profession">Developer</h2>
         </div>
-        <img
-          ref={ (heroImage) => { this.heroImage = heroImage; } }
-          onLoad={ this.handleImageLoading } className={ imageStyle } src="../../static/media/cover.jpg" />
+        <img onLoad={ this.handleImageLoading } className={ imageStyles } src="../../static/media/cover.jpg" />
         <Statusbar />
         <Global />
         <style jsx>{`
@@ -67,8 +65,8 @@ class Hero extends Component {
           .Name {
             animation: hero 1000ms 900ms forwards var(--slide);
             color: var(--white);
-            text-style: italic;
             font-size: 1.2rem;
+            text-style: italic;
             opacity: 0;
           }
 

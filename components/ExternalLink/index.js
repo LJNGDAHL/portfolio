@@ -14,9 +14,9 @@ const ExternalLink = ({ url, children }) => {
           font-size: 0.9rem;
           font-style: italic;
           margin: 1rem;
+          padding: 0.4em;
           position: absolute;
           right: 0;
-          padding: 0.4em;
           text-decoration: none;
           top: 0;
           z-index: 10;
@@ -33,6 +33,10 @@ const ExternalLink = ({ url, children }) => {
           transition: height 250ms var(--slide);
           width: 100%;
           z-index: -1;
+        }
+
+        .ExternalLink:hover {
+          color: var(--black);
         }
 
         .ExternalLink:hover::after {
