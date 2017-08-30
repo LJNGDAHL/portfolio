@@ -1,21 +1,17 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
 
-// TODO: Only to be used during testing
-import { githubResponse } from '../../utils';
-
 /**
  * Displays data from Github regarding latest commit.
  */
 class Statusbar extends Component {
   render() {
-    if (this.props.data) {
-      // TODO: Replace githubResponse with this.props.data
+    if (this.props.data && this.props.data.type === 'PushEvent') {
       // Use regex to match all characters in string until the letter "T"
-      const created = githubResponse[0].created_at.match(/^[^T]*/)[0];
-      const commit = githubResponse[0].payload.commits[0].message;
-      const repo = githubResponse[0].repo.name;
-      const repoURL = `https://github.com/${githubResponse[0].repo.name}`;
+      const created = this.props.data.type.created_at.match(/^[^T]*/)[0];
+      const commit = this.props.data.type.payload.commits[0].message;
+      const repo = this.props.data.type.repo.name;
+      const repoURL = `https://github.com/${this.props.data.type.repo.name}`;
 
       return (
         <div className="Statusbar">

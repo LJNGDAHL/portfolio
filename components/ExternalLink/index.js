@@ -35,6 +35,10 @@ const ExternalLink = ({ url, children }) => {
           z-index: -1;
         }
 
+        .ExternalLink:hover {
+          color: var(--black);
+        }
+
         .ExternalLink:hover::after {
           height: 100%;
         }

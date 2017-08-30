@@ -11,7 +11,6 @@ import Header from '../components/Header';
 import Contacts from '../components/Contacts';
 import WorkLink from '../components/WorkLink';
 
-
 class Single extends Component {
   static getInitialProps = async (context) => {
     const { id } = context.query;
@@ -38,7 +37,7 @@ class Single extends Component {
         <Contacts />
         <div className="Content">
           <div className="SingleLink">
-            <WorkLink url='../' negativeStyling={ true }>Go Home</WorkLink>
+            <WorkLink url='../' styles="Link Link--inverted">Go Home</WorkLink>
           </div>
           <div className="WorkContainer">
             <Work id={ this.props.id } key={ this.props.id } single={ true } />

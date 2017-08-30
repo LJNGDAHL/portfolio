@@ -6,10 +6,10 @@ import Global from '../Global';
  * @param {string} negativeStyling  If true, the work will get inverted colors in styling.
  * @param {string} children
  */
-const WorkLink = ({ url, onClick, negativeStyling, children }) => (
+const WorkLink = ({ url, onClick, styles, children }) => (
   <div>
     <a
-      className={ negativeStyling ? 'Link Link--negative' : 'Link' }
+      className={ styles }
       href={url}
       onClick={ onClick }>{ children }
     </a>
@@ -30,7 +30,7 @@ const WorkLink = ({ url, onClick, negativeStyling, children }) => (
         width: 100%;
       }
 
-      .Link--negative {
+      .Link--inverted {
         background-color: var(--black);
         border: 1px solid var(--white);
       }
@@ -40,7 +40,7 @@ const WorkLink = ({ url, onClick, negativeStyling, children }) => (
         color: var(--white);
       }
 
-      .Link--negative:hover {
+      .Link--inverted:hover {
         background-color: var(--white);
         color: var(--black);
       }
