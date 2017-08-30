@@ -93,9 +93,10 @@ class Single extends Component {
           }
 
           @media screen and (min-width: 600px) {
-            .Link {
+            .SingleLink {
               margin-top: 1.5rem;
               position: relative;
+              bottom: 90%;
             }
           }
         `}</style>

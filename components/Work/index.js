@@ -100,13 +100,22 @@ class Work extends Component {
           </div>
           <Global />
           <style jsx>{`
+            /**
+             * The calc function on top is to compensate for
+             * not animating translateY(-100px) when javascript is disabled.
+             * Used several times further down.
+             */
             .Work {
               background-color: var(--white);
               color: var(--black);
               margin: 7rem auto;
               width: 80vw;
-              padding: 7rem 2rem 0;
+              padding: calc(7rem - 100px) 2rem 0;
               position: relative;
+            }
+
+            :global(.has-js) .Work {
+              padding: 7rem 2rem 0;
             }
 
             .Negative .Work {
@@ -127,23 +136,27 @@ class Work extends Component {
               width: 10rem;
               height: 20rem;
               position: absolute;
-              top: 2rem;
+              top: calc(2rem - 100px);
               z-index: 1;
             }
 
+            :global(.has-js) .Decoration {
+              top: 2rem;
+            }
+
             .Decoration--single {
-              top: 4rem;
-              opacity: 0;
               animation: works 600ms 400ms forwards var(--slide);
+              opacity: 0;
+              top: 4rem;
               z-index: 1;
             }
 
             .Negative .Decoration {
               background-color: var(--transparentYellow);
-              width: 70%;
               height: 10rem;
               left: -10%;
               top: 15rem;
+              width: 70%;
             }
 
             :global(.has-js) .Decoration {
@@ -156,16 +169,20 @@ class Work extends Component {
 
             /**
              * Text content in work component
+             * The padding-bottom is to compensate for not using "works"
+             * animation when javascript is disabled.
              */
             .WorkContent {
               margin: 2rem auto;
+              position: relative;
+              padding-bottom: 100px;
               width: 100%;
               z-index: 2;
-              position: relative;
             }
 
             :global(.has-js) .WorkContent {
               opacity: 0;
+              padding-bottom: 0;
             }
 
             :global(.has-js) .Work--visible .WorkContent  {
@@ -228,8 +245,12 @@ class Work extends Component {
 
               .TagsContainer {
                 position: absolute;
-                top: 18rem;
+                top: calc(18rem - 100px);
                 right: 2rem;
+              }
+
+              :global(.has-js) .TagsContainer {
+                top: 18rem;
               }
             }
           `}
