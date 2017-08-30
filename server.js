@@ -9,26 +9,28 @@ app.prepare()
   .then(() => {
     const server = express();
 
+    // Display single work items on /work/:id
     server.get('/work/:id', (req, res) => {
       const actualPage = '/single';
       const queryParams = { id: req.params.id };
       app.render(req, res, actualPage, queryParams);
-    })
+    });
 
-    // FOr testing only!
-    server.get('/p/:id', (req, res) => {
-      const actualPage = '/post'
-      const queryParams = { title: req.params.id }
-      app.render(req, res, actualPage, queryParams)
+    /* Redirect to root if someone tries to access work directory, since this
+     * does not exist.
+     */
+    server.get('/work/', (req, res) => {
+      res.redirect('/');
     });
 
     server.get('*', (req, res) => {
       return handle(req, res);
     });
 
+    // Listen on localhost 3000
     server.listen(3000, (err) => {
       if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
+      console.log('Ready on http://localhost:3000/');
     });
   })
   .catch((ex) => {

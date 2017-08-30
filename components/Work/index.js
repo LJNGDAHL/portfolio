@@ -8,6 +8,7 @@ import { inOrAboveView } from '../../utils';
 
 import Global from '../Global';
 import ExternalLink from '../ExternalLink';
+import Decoration from '../Decoration';
 import WorkLink from '../WorkLink';
 import Tags from '../Tags';
 
@@ -59,19 +60,34 @@ class Work extends Component {
     const work = this.props.works.find(item => item.id === this.props.id);
     const isOpen = (this.props.open.indexOf(this.props.id) !== -1);
     const hasBeenInView = (this.props.inOrAboveView.indexOf(this.props.id) !== -1);
-    const oddNumber = ((this.props.works.indexOf(work) % 2) !== 0);
+    const oddItem = ((this.props.works.indexOf(work) % 2) !== 0);
+
+    let decorationStyles = 'Decoration';
+    let linkStyles = 'Link';
+    let workStyles = 'Work';
+
+    /* Odd items get inverted styling */
+    if (oddItem) {
+      decorationStyles += ' Decoration--inverted';
+      workStyles += ' Work--inverted';
+      linkStyles += ' Link--inverted';
+    }
+
+    if (hasBeenInView) {
+      workStyles += ' Work--visible';
+      decorationStyles += ' Decoration--visible';
+    }
+
+    if (this.props.single) {
+      decorationStyles += ' Decoration--single';
+    }
 
     return (
       <div>
-        <div className={ oddNumber ? 'Negative' : null } >
-          <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ hasBeenInView ? 'Work Work--visible' : 'Work' }>
+        <div>
+          <div ref={ (mainContainer) => { this.mainContainer = mainContainer; } } className={ workStyles }>
             <ExternalLink url={ work.link }>{ work.link }</ExternalLink>
-
-            {/* Sweet yellow box for decoration */}
-            { this.props.single ?
-              <div className="Decoration Decoration--single"></div> :
-              <div className="Decoration"></div>
-            }
+            <Decoration styles={ decorationStyles } />
 
             <div className="WorkContent">
               <h3 className="u-fontL u-bold u-upperCase">{ work.headline }</h3>
@@ -87,7 +103,7 @@ class Work extends Component {
                     url={`/work/${this.props.id}`}
                     id={ this.props.id }
                     onClick={ this.handleClick }
-                    negativeStyling={ oddNumber } >
+                    styles={ linkStyles } >
                     { isOpen ? 'Close' : 'Read More' }
                   </WorkLink>
                 </div>
@@ -95,22 +111,20 @@ class Work extends Component {
 
             </div>
             <div className="TagsContainer">
-              <Tags negativeStyling={ oddNumber } tags={ work.tags } />
+              <Tags styles={ oddItem } tags={ work.tags } />
             </div>
           </div>
           <Global />
           <style jsx>{`
             /**
-             * The calc function on top is to compensate for
-             * not animating translateY(-100px) when javascript is disabled.
-             * Used several times further down.
+             * 1. Compensation due to not animating when js is disabled.
              */
             .Work {
               background-color: var(--white);
               color: var(--black);
               margin: 7rem auto;
               width: 80vw;
-              padding: calc(7rem - 100px) 2rem 0;
+              padding: calc(7rem - 100px) 2rem 0; /* 1 */
               position: relative;
             }
 
@@ -118,7 +132,7 @@ class Work extends Component {
               padding: 7rem 2rem 0;
             }
 
-            .Negative .Work {
+            .Work--inverted {
               background-color: var(--black);
               color: var(--white);
             }
@@ -128,54 +142,13 @@ class Work extends Component {
             }
 
             /**
-             * Sweet Yellow Box (only for appearance)
-             */
-            .Decoration {
-              background-color: var(--yellow);
-              content: "";
-              width: 10rem;
-              height: 20rem;
-              position: absolute;
-              top: calc(2rem - 100px);
-              z-index: 1;
-            }
-
-            :global(.has-js) .Decoration {
-              top: 2rem;
-            }
-
-            .Decoration--single {
-              animation: works 600ms 400ms forwards var(--slide);
-              opacity: 0;
-              top: 4rem;
-              z-index: 1;
-            }
-
-            .Negative .Decoration {
-              background-color: var(--transparentYellow);
-              height: 10rem;
-              left: -10%;
-              top: 15rem;
-              width: 70%;
-            }
-
-            :global(.has-js) .Decoration {
-              opacity: 0;
-            }
-
-            :global(.has-js) .Work--visible .Decoration {
-              animation: works 800ms 200ms forwards var(--slide);
-            }
-
-            /**
              * Text content in work component
-             * The padding-bottom is to compensate for not using "works"
-             * animation when javascript is disabled.
+             * 1. Compensation due to not animating when js is disabled.
              */
             .WorkContent {
               margin: 2rem auto;
               position: relative;
-              padding-bottom: 100px;
+              padding-bottom: 100px; /* 1. */
               width: 100%;
               z-index: 2;
             }
@@ -201,7 +174,7 @@ class Work extends Component {
             }
 
             /**
-             * Details (is visible if user clicks on 'Read More')
+             * Details (visible if user clicks on 'Read More')
              */
             .Details {
               max-height: 0;
@@ -243,9 +216,12 @@ class Work extends Component {
                 width: 60%;
               }
 
+              /*
+              * 1. Compensation due to not animating when js is disabled.
+              */
               .TagsContainer {
                 position: absolute;
-                top: calc(18rem - 100px);
+                top: calc(18rem - 100px); /* 1. */
                 right: 2rem;
               }
 

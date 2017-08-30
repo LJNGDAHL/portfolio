@@ -22,11 +22,9 @@ class Index extends Component {
      */
     if (!data || !((Date.now() - data.time) < 3600000)) {
       try {
-        const res = await fetch('http://dog.ceo/api/breeds/image/random');
-        // // TODO: Replace dog stuff with real stuff
-        // const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
+        const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
         data = await res.json();
-        // data = data[0]; // TODO: This is needed when fetching from github.
+        data = data[0];
         data.time = Date.now();
       } catch (error) {
         props.error = error;

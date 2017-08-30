@@ -40,6 +40,7 @@ module.exports = {
         "class-methods-use-this": "off",
         "comma-dangle": "off",
         "no-else-return": "off",
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        "no-underscore-dangle": "off"
     }
 };
