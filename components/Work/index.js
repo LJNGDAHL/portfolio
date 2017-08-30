@@ -111,7 +111,7 @@ class Work extends Component {
 
             </div>
             <div className="TagsContainer">
-              <Tags styles={ oddItem } tags={ work.tags } />
+              <Tags styles={ oddItem ? 'Tags Tags--inverted' : 'Tags' } tags={ work.tags } />
             </div>
           </div>
           <Global />
