@@ -7,7 +7,7 @@ const Contacts = () => {
   return (
     <div className="Contacts">
       <h2 className="ContactsHeadline">Get In Touch</h2>
-      <div><a className="ContactsLink ContactsMail" href="mailto:hello@katarinaljungdahl.se?subject=Hello Developer!">hello@katarinaljungdahl.se</a>
+      <div><a className="ContactsLink ContactsMail" href="mailto:katarina@folkungagatan54.se?subject=Hello Developer!">katarina@folkungagatan54.se</a>
       </div>
       <a className="ContactsLink ContactsPhone" href="tel:+46738427919">+46 (0) 73 842 79 19</a>
       <Global />

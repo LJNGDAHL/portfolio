@@ -7,6 +7,17 @@ export const vh = () => (
 );
 
 /**
+ * Checks if an image is cached, else loads the image.
+ * @param {string} src  The image source.
+ */
+export const isCached = (src) => {
+  const image = new Image();
+  image.src = src;
+
+  return image.complete;
+};
+
+/**
  * Checks if element is in or above viewport
  * @param {string} element The element to be evaluated
  * @return {Boolean}

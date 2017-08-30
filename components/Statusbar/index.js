@@ -82,7 +82,7 @@ class Statusbar extends Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.githubData.data
+    data: state.githubData
   };
 }
 

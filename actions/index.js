@@ -1,8 +1,16 @@
 export const HAS_JS = 'HAS_JS';
-export function hasJS(haz) {
+export function hasJS(enabled) {
   return {
     type: HAS_JS,
-    hasJS: haz
+    hasJS: enabled
+  };
+}
+
+export const HERO_IMG_LOADED = 'HERO_IMG_LOADED';
+export function heroIsLoaded(loaded) {
+  return {
+    type: HERO_IMG_LOADED,
+    loaded
   };
 }
 
