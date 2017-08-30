@@ -3,7 +3,7 @@ import Global from '../Global';
 /**
  * @param {string} url
  * @param {function} onClick  The function to be run when link is clicked
- * @param {string} negativeStyling  If true, the work will get inverted colors in styling.
+ * @param {string} styles  Either "Link" or "Link Link--inverted"
  * @param {string} children
  */
 const WorkLink = ({ url, onClick, styles, children }) => (

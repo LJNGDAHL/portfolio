@@ -1,6 +1,6 @@
 /**
  * These are the global styles imported on every page.
- * Using with SUIT CSS naming convention.
+ * This project uses SUIT CSS naming convention.
  */
 const Global = () => {
   return (
@@ -26,6 +26,7 @@ const Global = () => {
         color: currentColor;
         margin: 0;
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         font-smoothing: antialiased;
       }
 
@@ -65,11 +66,6 @@ const Global = () => {
 
       .u-lineHeightL {
         line-height: 1.5 !important;
-      }
-
-      .u-fontSmoothing {
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
       }
 
       .u-semiBold {

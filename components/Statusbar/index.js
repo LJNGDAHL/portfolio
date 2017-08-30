@@ -2,16 +2,17 @@ import { connect } from 'react-redux';
 import { Component } from 'react';
 
 /**
- * Displays data from Github regarding latest commit.
+ * Displays data from Github from latest commit
+ * Only visible if a push event has occured.
  */
 class Statusbar extends Component {
   render() {
     if (this.props.data && this.props.data.type === 'PushEvent') {
       // Use regex to match all characters in string until the letter "T"
-      const created = this.props.data.type.created_at.match(/^[^T]*/)[0];
-      const commit = this.props.data.type.payload.commits[0].message;
-      const repo = this.props.data.type.repo.name;
-      const repoURL = `https://github.com/${this.props.data.type.repo.name}`;
+      const created = this.props.data.created_at.match(/^[^T]*/)[0];
+      const commit = this.props.data.payload.commits[0].message;
+      const repo = this.props.data.repo.name;
+      const repoURL = `https://github.com/${this.props.data.repo.name}`;
 
       return (
         <div className="Statusbar">
@@ -25,6 +26,7 @@ class Statusbar extends Component {
               background-color: var(--black);
               bottom: 6rem;
               color: var(--white);
+              line-height: 1.5;
               margin: 5%;
               opacity: 0;
               padding: 2rem 2.5rem 3rem;

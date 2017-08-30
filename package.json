@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "2.0.0",
-  "description": "A place used for displaying works. Mostly built as a learning experience.",
+  "description": "A portfolio template for displaying works. Mostly built as a learning experience.",
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",

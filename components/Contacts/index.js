@@ -8,9 +8,9 @@ const Contacts = () => {
   return (
     <div className="Contacts">
       <h2 className="ContactsHeadline">Get In Touch</h2>
-      <div><a className="ContactsLink ContactsMail" href="mailto:katarina@folkungagatan54.se?subject=Hello Developer!">katarina@folkungagatan54.se</a>
+      <div><a className="ContactsLink ContactsLink--200delay" href="mailto:katarina@folkungagatan54.se?subject=Hello Developer!">katarina@folkungagatan54.se</a>
       </div>
-      <a className="ContactsLink ContactsPhone" href="tel:+46738427919">+46 (0) 73 842 79 19</a>
+      <a className="ContactsLink ContactsLink--400delay" href="tel:+46738427919">+46 (0) 73 842 79 19</a>
       <Global />
       <style jsx>{`
         .Contacts {
@@ -39,16 +39,15 @@ const Contacts = () => {
           margin-left: 10rem;
           text-decoration: none;
           padding: 0.1rem 0.5rem;
+          transform: translateX(0);
         }
 
-        .ContactsMail {
+        .ContactsLink--200delay {
           animation: contacts 800ms 200ms var(--slide);
-          transform: translateX(0);
         }
 
-        .ContactsPhone {
+        .ContactsLink--400delay {
           animation: contacts 800ms 400ms var(--slide);
-          transform: translateX(0);
         }
 
         {/* Yellow background that animates from right to left */}
@@ -78,7 +77,6 @@ const Contacts = () => {
             opacity: 1;
             transform: translateX(0);
           }
-
         }
 
         /**

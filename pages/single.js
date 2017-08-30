@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
-import content from '../content'; // Replace with CMS in future
+import content from '../content';
 import { hasJS, addWorks } from '../actions';
 import initStore from '../store';
 
