@@ -1,7 +1,8 @@
 import Global from '../Global';
 
 /**
- * Displayed in top right corner.
+ * Displayed in top right on all pages
+ * (index and single)
  */
 const Contacts = () => {
   return (
