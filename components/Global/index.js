@@ -5,6 +5,8 @@
 const Global = () => {
   return (
     <style jsx global>{`
+      @import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700');
+
       :root {
         --black: #0F0E0E;
         --white: #F9F9F9;
