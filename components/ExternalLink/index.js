@@ -22,7 +22,7 @@ const ExternalLink = ({ url, children }) => {
           z-index: 10;
         }
 
-        {/* Yellow background that animates height */}
+        /* Yellow background with a transition of height when hovered */
         .ExternalLink::after {
           background: var(--yellow);
           bottom: 0;

@@ -1,4 +1,8 @@
-import { ADD_WORKS, TOGGLE_WORK, WORK_IN_OR_ABOVE_VIEW } from '../actions';
+import {
+  ADD_WORKS,
+  TOGGLE_WORK,
+  WORK_IN_OR_ABOVE_VIEW
+} from '../actions';
 
 /**
  * Handles the state used in Work Component.
