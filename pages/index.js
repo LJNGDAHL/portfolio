@@ -1,46 +1,54 @@
 import { Component } from 'react';
-import withRedux from 'next-redux-wrapper';
 import fetch from 'isomorphic-unfetch'; // For using fetch in both client/server
 
-import content from '../content'; // Replace with CMS in future
-import { hasJS, addGithubData, addWorks } from '../actions';
+import withRedux from 'next-redux-wrapper';
 import initStore from '../store';
+import { hasJS, addGithubData, addWorks } from '../actions';
+
+import getPrismicContent from '../api';
 
 import Global from '../components/Global';
 import Hero from '../components/Hero';
 import Work from '../components/Work';
+import ErrorMessage from '../components/ErrorMessage';
 import Footer from '../components/Footer';
 
 let data;
 
 class Index extends Component {
   static getInitialProps = async ({ store }) => {
-    const props = { works: content };
+    const state = store.getState();
+    const props = { works: {} };
 
-    /* If less then an hour since last fetch, return data stored on server.
-     * This is due to limitations in Githubs open Api.
-     */
-    if (!data || !((Date.now() - data.time) < 3600000)) {
-      try {
+    try {
+      let works = state.works.items;
+
+      // If works aren't already fetched, get them from Prismic.
+      if (!works.length) {
+        works = await getPrismicContent();
+        store.dispatch(addWorks(works));
+      }
+
+      props.works.items = works;
+
+      /* If less then an hour since last fetch, return data stored on server.
+      * This is due to fetching limitations in Githubs open Api.
+      */
+      if (!data || !((Date.now() - data.time) < 3600000)) {
         const res = await fetch('https://api.github.com/users/LJNGDAHL/events?page=1&per_page=1');
         data = await res.json();
         data = data[0];
         data.time = Date.now();
-      } catch (error) {
-        props.error = error;
       }
+    } catch (error) {
+      props.error = error;
     }
-
-    // Check if Github data is already added in Redux
-    const includesData = Object.prototype.hasOwnProperty.call(store.getState().githubData, 'data');
 
     // Dispatch action if Github data is not already added
-    if (!includesData) {
-      store.dispatch(addGithubData(data));
-    }
+    store.dispatch(addGithubData(data));
 
     return Object.assign(props, {
-      github: data
+      githubData: data
     });
   };
 
@@ -49,7 +57,6 @@ class Index extends Component {
   * they are accessible in components further down.
   */
   componentWillMount() {
-    this.props.dispatch(addWorks(content));
     this.props.dispatch(hasJS(typeof window !== 'undefined'));
 
     if (typeof window !== 'undefined') {
@@ -62,9 +69,13 @@ class Index extends Component {
       <div className={ this.props.hasJS ? 'has-js' : '' }>
         <Hero />
         <div className="Content">
-          { this.props.works.map(item => (
-            <Work id={ item.id } key={ item.id } single={ false } />
-          )) }
+          { this.props.error ?
+            <ErrorMessage />
+            :
+            this.props.works.items.map(item => (
+              <Work id={ item.slugs[0] } key={ item.id } single={ false } />
+            ))
+          }
           <Footer />
         </div>
         <Global />

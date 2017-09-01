@@ -1,28 +1,43 @@
 import { Component } from 'react';
 import withRedux from 'next-redux-wrapper';
 
-import content from '../content';
+import getPrismicContent from '../api';
+
 import { hasJS, addWorks } from '../actions';
 import initStore from '../store';
 
 import Global from '../components/Global';
 import Work from '../components/Work';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Contacts from '../components/Contacts';
+import ErrorMessage from '../components/ErrorMessage';
 import WorkLink from '../components/WorkLink';
 
 class Single extends Component {
-  static getInitialProps = async (context) => {
-    const { id } = context.query;
-    return content.find(item => item.id === id);
+  static getInitialProps = async ({ store }) => {
+    const props = { works: {} };
+
+    /**
+     * get work items from Prismic,
+     * and add them to Redux state.
+     */
+    try {
+      const works = await getPrismicContent();
+      store.dispatch(addWorks(works));
+      props.works.items = works;
+    } catch (error) {
+      props.error = error;
+    }
+
+    return props;
   }
 
-  /*
-  * Add content in Redux so that it is
-  * accessible in components furthter down.
-  */
+  /**
+   * Add information about if javascript is enabled in Redux.
+   * Also set html lang attribute to English before rendering.
+   */
   componentWillMount() {
-    this.props.dispatch(addWorks(content));
     this.props.dispatch(hasJS(typeof window !== 'undefined'));
 
     if (typeof window !== 'undefined') {
@@ -31,6 +46,9 @@ class Single extends Component {
   }
 
   render() {
+    const id = this.props.url.query.id; // URL path, used to find current work item
+    const work = this.props.works.items.find(item => item.slugs.includes(id));
+
     return (
       <div>
         <Header />
@@ -39,9 +57,16 @@ class Single extends Component {
           <div className="SingleLink">
             <WorkLink url='../' styles="Link Link--inverted">Go Home</WorkLink>
           </div>
-          <div className="WorkContainer">
-            <Work id={ this.props.id } key={ this.props.id } single={ true } />
-          </div>
+          { this.props.error ?
+            <div className="u-marginTopXL ErrorWrapper">
+              <ErrorMessage />
+            </div>
+            :
+            <div className="WorkContainer">
+              <Work id={ work.slugs[0] } key={ work.id } single={ true } />
+            </div>
+          }
+          <Footer />
         </div>
         <Global />
         <style jsx>{`
@@ -49,7 +74,7 @@ class Single extends Component {
             min-height: 100vh;
           }
 
-          {/* Sweet yellow box, only for decoration */}
+          /* Sweet yellow box, only for decoration */
           .Content::after {
             animation: single 1000ms 700ms forwards var(--slide);
             background-color: var(--transparentYellow);
@@ -69,9 +94,9 @@ class Single extends Component {
             bottom: 0;
             color: var(--white);
             opacity: 0;
-            width: 100%;
             position: fixed;
             z-index: 100;
+            width: 100%;
           }
 
           .WorkContainer {
@@ -93,9 +118,10 @@ class Single extends Component {
 
           @media screen and (min-width: 600px) {
             .SingleLink {
+              bottom: 90%;
               margin-top: 1.5rem;
               position: relative;
-              bottom: 90%;
+              width: 12rem;
             }
           }
         `}</style>

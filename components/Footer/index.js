@@ -4,7 +4,7 @@ import Global from '../Global';
 const Footer = () => {
   return (
     <div className="Footer">
-      <h2 className="u-upperCase u-fontM">Katarina Ljungdahl <span className="u-italic u-fontXS">Developer</span></h2>
+      <h2 className="u-upperCase u-fontM u-colorWhite">Katarina Ljungdahl <span className="u-italic u-fontXS">Developer</span></h2>
       <div className="u-marginTopS">
         <Link>
           <a href="https://github.com/LJNGDAHL/" className="FooterLink" >Github</a>

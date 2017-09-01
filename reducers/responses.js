@@ -1,4 +1,8 @@
-import { HAS_JS, ADD_GITHUB_DATA, HERO_IMG_LOADED } from '../actions';
+import {
+  HAS_JS,
+  ADD_GITHUB_DATA,
+  HERO_IMG_LOADED
+} from '../actions';
 
 /**
  * Update state when javascript is enabled
