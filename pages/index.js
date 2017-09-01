@@ -52,10 +52,10 @@ class Index extends Component {
     });
   };
 
-  /*
-  * Add data and content in Redux so that
-  * they are accessible in components further down.
-  */
+  /**
+   * Add information about if javascript is enabled in Redux.
+   * Also set html lang attribute to English before rendering.
+   */
   componentWillMount() {
     this.props.dispatch(hasJS(typeof window !== 'undefined'));
 
