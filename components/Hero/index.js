@@ -66,7 +66,7 @@ class Hero extends Component {
             animation: hero 1000ms 900ms forwards var(--slide);
             color: var(--white);
             font-size: 1.2rem;
-            text-style: italic;
+            font-style: italic;
             opacity: 0;
           }
 

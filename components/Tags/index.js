@@ -10,7 +10,7 @@ const Tags = ({ tags, styles }) => (
     <p className="u-fontXS u-marginBottom u-marginTopS">This project uses the following libraries and frameworks:</p>
     <ul className="TagList">
       { tags.map(tag => (
-        <li className="Tag" key={ tag }>{ tag }</li>
+        <li className="Tag" key={ tag.text }>{ tag.text }</li>
       )) }
     </ul>
     <Global />

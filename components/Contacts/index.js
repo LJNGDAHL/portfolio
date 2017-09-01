@@ -23,7 +23,6 @@ const Contacts = () => {
           right: 0;
           text-align: right;
           top: 0;
-          z-index: -1;
         }
 
         .ContactsHeadline {
@@ -50,7 +49,7 @@ const Contacts = () => {
           animation: contacts 800ms 400ms var(--slide);
         }
 
-        {/* Yellow background that animates from right to left */}
+        /* Yellow background that animates from right to left */
         .ContactsLink::after {
           background: var(--yellow);
           bottom: 0;

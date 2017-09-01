@@ -90,6 +90,10 @@ const Global = () => {
         color: var(--yellow) !important;
       }
 
+      .u-colorBlack {
+        color: var(--black) !important;
+      }
+
       /**
       * Margins and paddings
       */
