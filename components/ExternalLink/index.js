@@ -11,7 +11,7 @@ const ExternalLink = ({ url, children }) => {
       <style jsx>{`
         .ExternalLink {
           border-bottom: 2px solid var(--yellow);
-          font-size: 0.9rem;
+          font-size: 0.5rem;
           font-style: italic;
           margin: 1rem;
           padding: 0.4em;
@@ -46,6 +46,12 @@ const ExternalLink = ({ url, children }) => {
         /**
           * Media Queries
           */
+        @media screen and (min-width: 600px) {
+          .ExternalLink {
+            font-size: 0.9rem;
+          }
+        }
+
         @media screen and (min-width: 900px) {
           .ExternalLink {
             font-size: 1.2rem;

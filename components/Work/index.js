@@ -198,7 +198,7 @@ class Work extends Component {
 
           .Details--visible {
             margin-bottom: 2rem;
-            max-height: 300px;
+            max-height: 500px;
             opacity: 1;
           }
 
