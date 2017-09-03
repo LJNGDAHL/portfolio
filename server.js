@@ -16,8 +16,8 @@ app.prepare()
       app.render(req, res, actualPage, queryParams);
     });
 
-    /* Redirect to root if someone tries to access work directory, since this
-     * does not exist.
+    /* Redirect to root if someone tries to access work directory,
+     * since this does not exist.
      */
     server.get('/work/', (req, res) => {
       res.redirect('/');
