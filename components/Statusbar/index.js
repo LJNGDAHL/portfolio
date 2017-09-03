@@ -27,6 +27,7 @@ class Statusbar extends Component {
               bottom: 6rem;
               color: var(--white);
               line-height: 1.5;
+              left: 0;
               margin: 5%;
               opacity: 0;
               padding: 2rem 2.5rem 3rem;
@@ -62,7 +63,6 @@ class Statusbar extends Component {
             @media screen and (min-width: 600px) {
               .Statusbar {
                 bottom: 1rem;
-                left: 0;
                 margin: 0;
                 width: 25rem;
               }
