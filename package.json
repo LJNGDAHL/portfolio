@@ -24,7 +24,7 @@
     "express": "^4.15.4",
     "isomorphic-unfetch": "^2.0.0",
     "nanoraf": "^3.0.1",
-    "next": "^3.0.3",
+    "next": "^13.0.2",
     "next-redux-wrapper": "^1.3.2",
     "prismic-javascript": "^1.3.0",
     "prismic-richtext": "^0.2.2",
